@@ -53,6 +53,7 @@ reponse.oninput = () => {
 
 /***************Init the Game***************/
 function init() {
+    installBtn.classList.remove("slide"); //affiche la banniere perso
     container_start.style.display = "none";
     container_jeu.style.display = "block";
     document.body.classList.add("filterBlur"); //blur effect
@@ -72,6 +73,7 @@ function init() {
 /***************Replay Function***************/
 btnReplay.onclick = () => {
     container_gameOver.style.display = "none";
+    container_brain.classList.remove("rotate");
     score = 0;
     scoreID.textContent = 0;
     hiScoreID.textContent = hiScore;
@@ -182,6 +184,7 @@ metas[1].content = 'width=device-width, height=' + window.innerHeight + ' initia
 /******************Bouton d'Installation PWA******************/
 window.onbeforeinstallprompt = (event) => {
     installBtn.classList.add("slide"); //affiche la banniere perso
+
     event.preventDefault(); // annuler la banniere par defaut
 
     installBtn.onclick = () => {
