@@ -5,13 +5,20 @@ let max;
 let myTimer;
 let resultat;
 /***************Sound Files***************/
-const chrono = new Audio("sounds/chrono.mp3");
 const over = new Audio("sounds/lost.mp3");
 const wrong = new Audio("sounds/wrong.mp3");
 const right = new Audio("sounds/right.mp3");
+const chrono = new Audio("sounds/chrono.mp3");
+const newRecord = new Audio("sounds/hiScore.mp3");
+const tabAudio = [chrono, over, wrong, right, newRecord];
+mute(localStorage.getItem("sound"));
 /***************Init values***************/
 let widthBar = 0;
 let step = 5;
+let score = 0;
+let firstRecord = true;
+let hiScore = localStorage.getItem("hiScore") || "5";
+hiScoreID.textContent = hiScore;
 const random = () => Math.floor(Math.random() * (max - min + 1)) + min;
 
 /***************Input Value Verification***************/
@@ -65,13 +72,17 @@ function init() {
 /***************Replay Function***************/
 btnReplay.onclick = () => {
     container_gameOver.style.display = "none";
-    score.textContent = 0;
+    score = 0;
+    scoreID.textContent = 0;
+    hiScoreID.textContent = hiScore;
+    firstRecord = true;
 
     number1.textContent = random();
     number2.textContent = random();
     reponse.value = "";
     widthBar = -5;
     step = 5;
+    chrono.playbackRate = 1;
     myTimer = setInterval(timer, 500);
     reponse.focus();
 };
@@ -91,7 +102,7 @@ function timer() {
         gameOver();
     }
 
-    if (widthBar == 70) chrono.playbackRate = 1.2;
+    if (widthBar > 60) chrono.playbackRate = 1.2;
 
     progressBar.style.width = widthBar + "%";
 }
@@ -99,8 +110,17 @@ function timer() {
 /***************Next Number Function***************/
 function nextNumber() {
     right.play();
-    score.textContent++;
-    document.body.style.borderColor = "green";
+    document.body.style.borderColor = "#28df99";
+    score++;
+    scoreID.textContent = score;
+    if (score > hiScore) {
+        localStorage.setItem("hiScore", score);
+        hiScoreID.textContent = score;
+        if (firstRecord) {
+            newRecord.play();
+            firstRecord = false;
+        }
+    }
 
     setTimeout(() => {
         document.body.style.borderColor = "gold";
@@ -109,9 +129,9 @@ function nextNumber() {
         reponse.value = "";
         widthBar = -5;
         step = (step < 15) ? step + 1 : 15;
-        console.log(step);
+        chrono.playbackRate = 1;
         myTimer = setInterval(timer, 500);
-    }, 500);
+    }, 700);
 }
 
 /***************Game Over Function***************/
@@ -128,11 +148,64 @@ function gameOver() {
         clearInterval(myTimer);
         resultat = resultat ? resultat : number1.textContent * number2.textContent;
         bonneReponse.textContent = `${number1.textContent} x ${number2.textContent} = ${resultat}`;
-        scoreFinal.textContent = score.textContent;
-    }, 1500);
+        scoreFinal.textContent = score;
+        if (!firstRecord) scoreFinal.textContent += "\nNouveau Record!";
+    }, 1000);
 }
 
+/***************Sound Control***************/
+function mute(sound) {
+    if (sound == "off") {
+        speaker.textContent = "🔈";
+        for (let audio of tabAudio) audio.muted = true;
+    }
+}
+
+speaker.onclick = () => {
+    if (speaker.textContent == "🔊") {
+        speaker.textContent = "🔈";
+        for (let audio of tabAudio) audio.muted = true;
+        localStorage.setItem("sound", "off");
+    }
+
+    else {
+        speaker.textContent = "🔊";
+        for (let audio of tabAudio) audio.muted = false;
+        localStorage.setItem("sound", "on");
+    }
+};
 
 /***************Prevent Resize cause keyboard***************/
 const metas = document.getElementsByTagName('meta');
 metas[1].content = 'width=device-width, height=' + window.innerHeight + ' initial-scale=1.0, maximum-scale=5.0,user-scalable=0';
+
+/******************Bouton d'Installation PWA******************/
+window.onbeforeinstallprompt = (event) => {
+    installBtn.classList.add("slide"); //affiche la banniere perso
+    event.preventDefault(); // annuler la banniere par defaut
+
+    installBtn.onclick = () => {
+        installBtn.classList.remove("slide"); //faire disparaitre le bouton
+        setTimeout(() => installBtn.style.display = "none", 500);
+        event.prompt(); //permettre l'installation
+    };
+};
+
+/******************Service Worker ******************/
+//Register service worker to control making site work offline
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker
+            .register('sw.js')
+            .then(registration => {
+                console.log(
+                    `Service Worker enregistré ! Ressource: ${registration.scope}`
+                );
+            })
+            .catch(err => {
+                console.log(
+                    `Echec de l'enregistrement du Service Worker: ${err}`
+                );
+            });
+    });
+}

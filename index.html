@@ -1,12 +1,17 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="NadfriJS" />
+    <meta name="description" content="Jeu de Calcul Mental">
+    <meta name="theme-color" content="#6495ed">
     <title>Calcul Mental</title>
+    <link rel='manifest' href='manifest.json'>
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
     <script src="script.js" defer></script>
 </head>
 
@@ -18,15 +23,16 @@
             <input type="number" id="maxNum" class="max" placeholder="Max">
         </div>
         <div class="container_btn">
-            <button id="btnStart" class="btnStart">Démarrer</button>
+            <button id="btnStart" class="btn">Démarrer</button>
         </div>
     </div>
 
     <!-- Page de Jeu -->
     <div class="container_jeu" id="container_jeu">
         <div class="div-score">
-            <div>Score: <span id="score">0</span></div>
-            <div>HiScore: <span id="hiScore">0</span></div>
+            <div>Score: <span id="scoreID" class="scoreID">0</span></div>
+            <span id="speaker" class="speaker">🔊</span>
+            <div>HiScore: <span id="hiScoreID" class="hiScoreID">0</span></div>
         </div>
 
         <div class="timer">
@@ -44,7 +50,7 @@
             <span id="number2"></span>
         </div>
         <hr>
-        <input type="number" id="reponse" class="reponse" placeholder="Ca fait...?">
+        <input type="number" id="reponse" class="reponse" placeholder="...?">
         <hr>
 
     </div>
@@ -58,10 +64,13 @@
             <span id="scoreFinal" class="scoreFinal">10</span>
         </div>
         <div class="container_btn">
-            <button id="btnReplay" class="btnStart">Rejouer</button>
+            <button id="btnReplay" class="btn">Rejouer</button>
         </div>
 
     </div>
+
+    <div id="installBtn" class="installBtn">Clic ici pour l'installer 👍</div>
+
 
 </body>
 
