@@ -148,7 +148,7 @@ function gameOver() {
         document.body.style.borderColor = "gold";
         container_gameOver.style.display = "flex";
         clearInterval(myTimer);
-        resultat = resultat ? resultat : number1.textContent * number2.textContent;
+        resultat = number1.textContent * number2.textContent;
         bonneReponse.textContent = `${number1.textContent} x ${number2.textContent} = ${resultat}`;
         scoreFinal.textContent = score;
         if (!firstRecord) scoreFinal.textContent += "\nNouveau Record!";
