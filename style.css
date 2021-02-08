@@ -286,9 +286,9 @@ hr {
 
 .installBtn {
     position: absolute;
-    top: 0;
+    top: -10px;
     left: 0;
-    height: 6vh;
+    height: 7vh;
     width: 100%;
     background-color: #EFEFEF;
     display: flex;
