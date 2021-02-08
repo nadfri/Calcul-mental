@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcul Mental</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <!-- Page de Démarrage -->
+    <div class="container_start" id="container_start">
+        <div class="container-min-max">
+            <input type="number" id="minNum" class="min" placeholder="Min">
+            <input type="number" id="maxNum" class="max" placeholder="Max">
+        </div>
+        <div class="container_btn">
+            <button id="btnStart" class="btnStart">Démarrer</button>
+        </div>
+    </div>
+
+    <!-- Page de Jeu -->
+    <div class="container_jeu" id="container_jeu">
+        <div class="div-score">
+            <div>Score: <span id="score">0</span></div>
+            <div>HiScore: <span id="hiScore">0</span></div>
+        </div>
+
+        <div class="timer">
+            <div class="progressBar-container">
+                <div class="progressBar" id="progressBar"></div>
+            </div>
+            <div id="container_brain">
+                <img class="brain2" src="images/brain2.svg" alt="brain">
+            </div>
+        </div>
+
+        <div class="container_calcul">
+            <span id="number1"></span>
+            <span class="operator">x</span>
+            <span id="number2"></span>
+        </div>
+        <hr>
+        <input type="number" id="reponse" class="reponse" placeholder="Ca fait...?">
+        <hr>
+
+    </div>
+
+    <div id="container_gameOver" class="container_gameOver">
+        <div class="brain"><img src="images/brain2.svg" alt="brain"></div>
+        <div id="bonneReponse" class="bonneReponse">
+        </div>
+        <div class="container_scoreFinal">
+            <span>Ton score:</span>
+            <span id="scoreFinal" class="scoreFinal">10</span>
+        </div>
+        <div class="container_btn">
+            <button id="btnReplay" class="btnStart">Rejouer</button>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
