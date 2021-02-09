@@ -52,12 +52,14 @@ body {
     background-position: center;
     background-size: 80%;
     border: solid 10px gold;
-    backdrop-filter: blur(0);
+    -webkit-backdrop-filter: blur(0);
+            backdrop-filter: blur(0);
     transition: all 1.5s;
 }
 
 .filterBlur {
-    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
 }
 
 /*Container de la parge Demarrer*/
@@ -109,7 +111,29 @@ body {
     color: #323232;
     box-shadow: 1px 1px 5px 1px #5d5d5d;
     text-shadow: 0px 1px 2px rgb(101, 101, 101);
-    animation: heartbeat 2.5s infinite;
+    -webkit-animation: heartbeat 2.5s infinite;
+            animation: heartbeat 2.5s infinite;
+}
+
+@-webkit-keyframes heartbeat {
+    0% {
+        transform: scale( .75);
+    }
+    20% {
+        transform: scale( 1);
+    }
+    40% {
+        transform: scale( .75);
+    }
+    60% {
+        transform: scale( 1);
+    }
+    80% {
+        transform: scale( .75);
+    }
+    100% {
+        transform: scale( .75);
+    }
 }
 
 @keyframes heartbeat {
@@ -180,6 +204,22 @@ body {
     text-shadow: 2px 2px 2px rgb(60 60 60);
 }
 
+::-webkit-input-placeholder {
+    color: #afafaf;
+}
+
+::-moz-placeholder {
+    color: #afafaf;
+}
+
+:-ms-input-placeholder {
+    color: #afafaf;
+}
+
+::-ms-input-placeholder {
+    color: #afafaf;
+}
+
 ::placeholder {
     color: #afafaf;
 }
@@ -229,7 +269,8 @@ hr {
 
 .brain2 {
     width: 100%;
-    animation: heartbeat 1.5s infinite;
+    -webkit-animation: heartbeat 1.5s infinite;
+            animation: heartbeat 1.5s infinite;
 }
 
 /*Page GameOver*/
@@ -255,7 +296,14 @@ hr {
 
 .brain img {
     width: 100%;
-    animation: rotation 2s infinite;
+    -webkit-animation: rotation 2s infinite;
+            animation: rotation 2s infinite;
+}
+
+@-webkit-keyframes rotation {
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 @keyframes rotation {
