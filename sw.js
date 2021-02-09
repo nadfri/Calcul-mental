@@ -17,3 +17,4 @@ registerRoute(
     ({ request }) => request.destination === 'style',
     new StaleWhileRevalidate({ cacheName: 'css-cache' })
 );
+

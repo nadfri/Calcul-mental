@@ -70,8 +70,6 @@ function init() {
     container_jeu.style.display = "block";
     document.body.classList.add("filterBlur"); //blur effect
 
-    myTimer = setInterval(timer, 500);
-
     min = (minNum.value) ? parseInt(minNum.value) : 2;
     max = (maxNum.value) ? parseInt(maxNum.value) : 10;
 
@@ -79,6 +77,7 @@ function init() {
 
     newNumbersRandom();
     reponse.focus();
+    myTimer = setInterval(timer, 500);
 }
 
 /***************Timer Function***************/
@@ -86,13 +85,13 @@ function timer() {
     chrono.play();
     widthBar += step;
 
+    if (widthBar > 60) chrono.playbackRate = 1.2;
+
     if (widthBar > 100) {
         widthBar = 100; //blok to 100%
         container_brain.classList.add("rotate");
         gameOver();
     }
-
-    if (widthBar > 60) chrono.playbackRate = 1.2;
 
     progressBar.style.width = widthBar + "%";
 }
@@ -115,7 +114,8 @@ function nextNumber() {
         newNumbersRandom();
         reponse.value = "";
         widthBar = -5;
-        step = (step < 15) ? step + 1 : 15;
+        step = (step < 20) ? step + 1 : 20;
+
         chrono.playbackRate = 1;
         myTimer = setInterval(timer, 500);
     }, 700);
@@ -155,20 +155,10 @@ btnReplay.onclick = () => {
     reponse.focus();
 };
 
-/***************Back Home Function***************/
-function home() {
-    installBtn.classList.add("slide"); //affiche la banniere perso
-    container_start.style.display = "block";
-    container_jeu.style.display = "none";
-    container_gameOver.style.display = "none";
-    reponse.value = "";
-}
-
-
 /***************Game Over Function***************/
 function gameOver() {
-    chrono.pause();
     clearInterval(myTimer);
+    chrono.pause();
 
     (widthBar == 100) ? over.play() : wrong.play();
 
@@ -186,6 +176,14 @@ function gameOver() {
     }, 1000);
 }
 
+/***************Back Home Function***************/
+function home() {
+    installBtn.classList.add("slide"); //affiche la banniere perso
+    container_start.style.display = "block";
+    container_jeu.style.display = "none";
+    container_gameOver.style.display = "none";
+    reponse.value = "";
+}
 /***************Sound Control***************/
 function mute(sound) {
     if (sound == "off") {
@@ -229,7 +227,7 @@ window.onbeforeinstallprompt = (event) => {
 
     installBtn.onclick = () => {
         installBtn.classList.remove("slide"); //faire disparaitre le bouton
-        setTimeout(() => installBtn.style.display = "none", 500);
+        setTimeout(() => installBtn.style.display = "none", 300);
         event.prompt(); //permettre l'installation
     };
 };

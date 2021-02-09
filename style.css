@@ -314,7 +314,7 @@ hr {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all 1s;
+    transition: all 0.3s;
     border-bottom-left-radius: 40px;
     border-bottom-right-radius: 40px;
     transform: translateY(-200%);
