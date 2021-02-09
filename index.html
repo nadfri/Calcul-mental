@@ -18,13 +18,15 @@
 <body>
     <!-- Page de Démarrage -->
     <div class="container_start" id="container_start">
-        <div class="container-min-max">
-            <input type="number" id="minNum" class="min" placeholder="Min">
-            <input type="number" id="maxNum" class="max" placeholder="Max">
-        </div>
-        <div class="container_btn">
-            <button id="btnStart" class="btn">Démarrer</button>
-        </div>
+        <form onSubmit="return false;">
+            <div class="container-min-max">
+                <input type="number" id="minNum" class="min" placeholder="Min">
+                <input type="number" id="maxNum" class="max" placeholder="Max">
+            </div>
+            <div class="container_btn">
+                <button id="btnStart" type="submit" class="btn">Démarrer</button>
+            </div>
+        </form>
     </div>
 
     <!-- Page de Jeu -->
@@ -67,11 +69,11 @@
             <button id="btnReplay" class="btn">Rejouer</button>
         </div>
 
-        <div class="home"><img id="btnHome"src="images/home.png" alt="home"></div>
+        <div class="home"><img id="btnHome" src="images/home.png" alt="home"></div>
 
     </div>
 
-    
+
     <div id="installBtn" class="installBtn">Clic ici pour l'installer 👍</div>
 
 

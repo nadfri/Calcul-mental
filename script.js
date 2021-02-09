@@ -2,8 +2,13 @@
 /***************Global Variable***************/
 let min;
 let max;
+let step;
+let score;
 let myTimer;
+let hiScore;
 let resultat;
+let widthBar;
+let firstRecord;
 /***************Sound Files***************/
 const over = new Audio("sounds/lost.mp3");
 const wrong = new Audio("sounds/wrong.mp3");
@@ -12,13 +17,8 @@ const chrono = new Audio("sounds/chrono.mp3");
 const newRecord = new Audio("sounds/hiScore.mp3");
 const tabAudio = [chrono, over, wrong, right, newRecord];
 mute(localStorage.getItem("sound"));
-/***************Init values***************/
-let widthBar = 0;
-let step = 5;
-let score = 0;
-let firstRecord = true;
-let hiScore = localStorage.getItem("hiScore") || "5";
-hiScoreID.textContent = hiScore;
+
+/***************Random Number***************/
 const random = () => Math.floor(Math.random() * (max - min + 1)) + min;
 
 /***************Input Value Verification***************/
@@ -52,8 +52,17 @@ reponse.oninput = () => {
         gameOver();
 };
 
+/***End Game Code***/
+
 /***************Init the Game***************/
 function init() {
+    widthBar = 0;
+    step = 5;
+    score = 0;
+    firstRecord = true;
+    hiScore = localStorage.getItem("hiScore") || "5";
+    hiScoreID.textContent = hiScore;
+
     installBtn.classList.remove("slide"); //affiche la banniere perso
     container_start.style.display = "none";
     container_jeu.style.display = "block";
@@ -71,8 +80,25 @@ function init() {
     reponse.focus();
 }
 
+/***************Timer Function***************/
+function timer() {
+    chrono.play();
+    widthBar += step;
+
+    if (widthBar > 100) {
+        widthBar = 100; //blok to 100%
+        container_brain.classList.add("rotate");
+        gameOver();
+    }
+
+    if (widthBar > 60) chrono.playbackRate = 1.2;
+
+    progressBar.style.width = widthBar + "%";
+}
+
 /***************Replay Function***************/
 btnReplay.onclick = () => {
+    document.body.classList.add("filterBlur"); //blur effect
     container_gameOver.style.display = "none";
     container_brain.classList.remove("rotate");
     score = 0;
@@ -96,28 +122,7 @@ function home() {
     container_start.style.display = "block";
     container_jeu.style.display = "none";
     container_gameOver.style.display = "none";
-    document.body.classList.remove("filterBlur"); //blur effect
     reponse.value = "";
-}
-
-/***************Timer Function***************/
-function timer() {
-    chrono.play();
-    widthBar += step;
-
-    if (widthBar > 100) {
-        widthBar = 100; //blok to 100%
-        container_brain.classList.add("rotate");
-        clearInterval(myTimer);
-        chrono.pause();
-        chrono.currentTime = 0;
-        over.play();
-        gameOver();
-    }
-
-    if (widthBar > 60) chrono.playbackRate = 1.2;
-
-    progressBar.style.width = widthBar + "%";
 }
 
 /***************Next Number Function***************/
@@ -142,7 +147,7 @@ function nextNumber() {
 }
 
 function newHiScore() {
-    console.log(min,max)
+    console.log(min, max);
     if (min < 3 && max > 9) {
         if (score > hiScore) {
             localStorage.setItem("hiScore", score);
@@ -157,16 +162,20 @@ function newHiScore() {
 
 /***************Game Over Function***************/
 function gameOver() {
-    clearInterval(myTimer);
     chrono.pause();
-    wrong.play();
+    chrono.currentTime = 0;
+    clearInterval(myTimer);
+
+    (widthBar == 100) ? over.play() : wrong.play();
+
     document.body.style.borderColor = "red";
     reponse.blur();
 
     setTimeout(() => {
+        document.body.classList.remove("filterBlur"); //blur effect
         document.body.style.borderColor = "gold";
         container_gameOver.style.display = "flex";
-        clearInterval(myTimer);
+
         resultat = number1.textContent * number2.textContent;
         bonneReponse.textContent = `${number1.textContent} x ${number2.textContent} = ${resultat}`;
         scoreFinal.textContent = score;
@@ -195,6 +204,15 @@ speaker.onclick = () => {
         localStorage.setItem("sound", "on");
     }
 };
+
+function mutedOnScreen() {
+    if (document.hidden)
+        for (let audio of tabAudio) audio.muted = true;
+    else
+        for (let audio of tabAudio) audio.muted = false;
+
+}
+document.addEventListener("visibilitychange", mutedOnScreen, false);
 
 /***************Prevent Resize cause keyboard***************/
 const metas = document.getElementsByTagName('meta');
@@ -231,3 +249,4 @@ if ('serviceWorker' in navigator) {
             });
     });
 }
+

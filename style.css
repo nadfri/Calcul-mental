@@ -35,9 +35,13 @@ button {
 
 html, body {
     height: 100%;
+    width: 100%;
 }
 
 body {
+    position: fixed;
+    top:0;
+    left: 0;
     margin: auto;
     background-color: cornflowerblue;
     background-image: url(./images/brain.png);
