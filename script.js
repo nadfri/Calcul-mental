@@ -4,11 +4,12 @@ let min;
 let max;
 let step;
 let score;
-let myTimer;
 let hiScore;
+let myTimer;
 let resultat;
 let widthBar;
 let firstRecord;
+
 /***************Sound Files***************/
 const over = new Audio("sounds/lost.mp3");
 const wrong = new Audio("sounds/wrong.mp3");
@@ -16,15 +17,37 @@ const right = new Audio("sounds/right.mp3");
 const chrono = new Audio("sounds/chrono.mp3");
 const newRecord = new Audio("sounds/hiScore.mp3");
 const tabAudio = [chrono, over, wrong, right, newRecord];
-mute(localStorage.getItem("sound"));
+mute(localStorage.getItem("sound")); //mute function
 
-/***************Random Number***************/
-const random = () => Math.floor(Math.random() * (max - min + 1)) + min;
+/***************Start Game***************/
+btnStart.onclick = init;
+btnHome.onclick = home;
 
-/***************Input Value Verification***************/
 minNum.oninput = verifInput;
 maxNum.oninput = verifInput;
 
+reponse.oninput = () => {
+    if (reponse.value[0] !== resultat.toString()[0])
+        gameOver();
+
+    else if (reponse.value.length === resultat.toString().length) {
+
+        if (resultat == reponse.value) nextNumber();
+        else gameOver();
+    }
+};
+
+/***End Game Code***/
+
+/***************Random Function***************/
+function newNumbersRandom() {
+    const random = () => Math.floor(Math.random() * (max - min + 1)) + min;
+    number1.textContent = random();
+    number2.textContent = random();
+    resultat = number1.textContent * number2.textContent;
+}
+
+/***************Input Value Verification***************/
 function verifInput() {
     if (this.value != "") {
         if (this.value < 0) this.value = -this.value;
@@ -32,27 +55,6 @@ function verifInput() {
         this.value = parseInt(this.value);
     }
 }
-
-/***************Start Game***************/
-btnStart.onclick = init;
-btnHome.onclick = home;
-
-reponse.oninput = () => {
-    resultat = number1.textContent * number2.textContent;
-
-    if (reponse.value.length === resultat.toString().length) {
-        clearInterval(myTimer);
-        chrono.pause();
-        chrono.currentTime = 0;
-        if (resultat == reponse.value) nextNumber();
-        else gameOver();
-
-    }
-    else if (reponse.value[0] !== resultat.toString()[0])
-        gameOver();
-};
-
-/***End Game Code***/
 
 /***************Init the Game***************/
 function init() {
@@ -75,8 +77,7 @@ function init() {
 
     if (min > max) [min, max] = [max, min]; //reverse min/max
 
-    number1.textContent = random();
-    number2.textContent = random();
+    newNumbersRandom();
     reponse.focus();
 }
 
@@ -96,6 +97,43 @@ function timer() {
     progressBar.style.width = widthBar + "%";
 }
 
+/***************Next Calcul Function***************/
+function nextNumber() {
+    clearInterval(myTimer);
+    chrono.currentTime = 0;
+    chrono.pause();
+
+    right.play();
+    document.body.style.borderColor = "#28df99";
+    score++;
+    scoreID.textContent = score;
+
+    newHiScore();
+
+    setTimeout(() => {
+        document.body.style.borderColor = "gold";
+        newNumbersRandom();
+        reponse.value = "";
+        widthBar = -5;
+        step = (step < 15) ? step + 1 : 15;
+        chrono.playbackRate = 1;
+        myTimer = setInterval(timer, 500);
+    }, 700);
+}
+
+/***************New HighScore Function***************/
+function newHiScore() {
+    if (min < 3 && max > 9) {
+        if (score > hiScore) {
+            localStorage.setItem("hiScore", score);
+            hiScoreID.textContent = score;
+            if (firstRecord) {
+                newRecord.play();
+                firstRecord = false;
+            }
+        }
+    }
+}
 /***************Replay Function***************/
 btnReplay.onclick = () => {
     document.body.classList.add("filterBlur"); //blur effect
@@ -106,12 +144,13 @@ btnReplay.onclick = () => {
     hiScoreID.textContent = hiScore;
     firstRecord = true;
 
-    number1.textContent = random();
-    number2.textContent = random();
+    newNumbersRandom();
+
     reponse.value = "";
     widthBar = -5;
     step = 5;
     chrono.playbackRate = 1;
+    chrono.currentTime = 0;
     myTimer = setInterval(timer, 500);
     reponse.focus();
 };
@@ -125,45 +164,10 @@ function home() {
     reponse.value = "";
 }
 
-/***************Next Number Function***************/
-function nextNumber() {
-    right.play();
-    document.body.style.borderColor = "#28df99";
-    score++;
-    scoreID.textContent = score;
-
-    newHiScore();
-
-    setTimeout(() => {
-        document.body.style.borderColor = "gold";
-        number1.textContent = random();
-        number2.textContent = random();
-        reponse.value = "";
-        widthBar = -5;
-        step = (step < 15) ? step + 1 : 15;
-        chrono.playbackRate = 1;
-        myTimer = setInterval(timer, 500);
-    }, 700);
-}
-
-function newHiScore() {
-    console.log(min, max);
-    if (min < 3 && max > 9) {
-        if (score > hiScore) {
-            localStorage.setItem("hiScore", score);
-            hiScoreID.textContent = score;
-            if (firstRecord) {
-                newRecord.play();
-                firstRecord = false;
-            }
-        }
-    }
-}
 
 /***************Game Over Function***************/
 function gameOver() {
     chrono.pause();
-    chrono.currentTime = 0;
     clearInterval(myTimer);
 
     (widthBar == 100) ? over.play() : wrong.play();
@@ -176,7 +180,6 @@ function gameOver() {
         document.body.style.borderColor = "gold";
         container_gameOver.style.display = "flex";
 
-        resultat = number1.textContent * number2.textContent;
         bonneReponse.textContent = `${number1.textContent} x ${number2.textContent} = ${resultat}`;
         scoreFinal.textContent = score;
         if (!firstRecord) scoreFinal.textContent += "\nNouveau Record!";
