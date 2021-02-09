@@ -77,7 +77,7 @@ body {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin-top: 8vh;
+    margin-top: 7vh;
 }
 
 .min, .max {
@@ -97,6 +97,7 @@ body {
 
 .a-div {
     font-size: 3rem;
+    color: #efefef;
     text-shadow: 2px 2px 2px rgb(60, 60, 60);
 }
 
