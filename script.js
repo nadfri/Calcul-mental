@@ -35,6 +35,7 @@ function verifInput() {
 
 /***************Start Game***************/
 btnStart.onclick = init;
+btnHome.onclick = home;
 
 reponse.oninput = () => {
     resultat = number1.textContent * number2.textContent;
@@ -89,6 +90,16 @@ btnReplay.onclick = () => {
     reponse.focus();
 };
 
+/***************Back Home Function***************/
+function home() {
+    installBtn.classList.add("slide"); //affiche la banniere perso
+    container_start.style.display = "block";
+    container_jeu.style.display = "none";
+    container_gameOver.style.display = "none";
+    document.body.classList.remove("filterBlur"); //blur effect
+    reponse.value = "";
+}
+
 /***************Timer Function***************/
 function timer() {
     chrono.play();
@@ -115,14 +126,8 @@ function nextNumber() {
     document.body.style.borderColor = "#28df99";
     score++;
     scoreID.textContent = score;
-    if (score > hiScore) {
-        localStorage.setItem("hiScore", score);
-        hiScoreID.textContent = score;
-        if (firstRecord) {
-            newRecord.play();
-            firstRecord = false;
-        }
-    }
+
+    newHiScore();
 
     setTimeout(() => {
         document.body.style.borderColor = "gold";
@@ -134,6 +139,20 @@ function nextNumber() {
         chrono.playbackRate = 1;
         myTimer = setInterval(timer, 500);
     }, 700);
+}
+
+function newHiScore() {
+    console.log(min,max)
+    if (min < 3 && max > 9) {
+        if (score > hiScore) {
+            localStorage.setItem("hiScore", score);
+            hiScoreID.textContent = score;
+            if (firstRecord) {
+                newRecord.play();
+                firstRecord = false;
+            }
+        }
+    }
 }
 
 /***************Game Over Function***************/
