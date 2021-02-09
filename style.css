@@ -29,6 +29,7 @@ input::-webkit-inner-spin-button, input::-webkit-outer-spin-button {
 
 button {
     cursor: pointer;
+    color: #323232;
 }
 
 /*BODY*/
@@ -53,13 +54,13 @@ body {
     background-size: 80%;
     border: solid 10px gold;
     -webkit-backdrop-filter: blur(0);
-            backdrop-filter: blur(0);
+    backdrop-filter: blur(0);
     transition: all 1.5s;
 }
 
 .filterBlur {
     -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
 }
 
 /*Container de la parge Demarrer*/
@@ -75,6 +76,8 @@ body {
 .container-min-max {
     display: flex;
     justify-content: space-around;
+    align-items: center;
+    margin-top: 8vh;
 }
 
 .min, .max {
@@ -82,13 +85,18 @@ body {
     max-width: 200px;
     height: 30vw;
     max-height: 200px;
-    margin-top: 4vh;
     font-size: 3rem;
     text-align: center;
     border: none;
     border-radius: 5px;
+    color: #7b7b7b;
     background-color: #ff884b;
     box-shadow: 1px 1px 5px 1px #5d5d5d;
+    text-shadow: 2px 2px 2px rgb(60, 60, 60);
+}
+
+.a-div {
+    font-size: 3rem;
     text-shadow: 2px 2px 2px rgb(60, 60, 60);
 }
 
@@ -108,11 +116,10 @@ body {
     border: none;
     border-radius: 5px;
     font-size: 3rem;
-    color: #323232;
     box-shadow: 1px 1px 5px 1px #5d5d5d;
     text-shadow: 0px 1px 2px rgb(101, 101, 101);
     -webkit-animation: heartbeat 2.5s infinite;
-            animation: heartbeat 2.5s infinite;
+    animation: heartbeat 2.5s infinite;
 }
 
 @-webkit-keyframes heartbeat {
@@ -270,7 +277,7 @@ hr {
 .brain2 {
     width: 100%;
     -webkit-animation: heartbeat 1.5s infinite;
-            animation: heartbeat 1.5s infinite;
+    animation: heartbeat 1.5s infinite;
 }
 
 /*Page GameOver*/
@@ -297,7 +304,7 @@ hr {
 .brain img {
     width: 100%;
     -webkit-animation: rotation 2s infinite;
-            animation: rotation 2s infinite;
+    animation: rotation 2s infinite;
 }
 
 @-webkit-keyframes rotation {
@@ -368,7 +375,6 @@ hr {
     border-bottom-left-radius: 40px;
     border-bottom-right-radius: 40px;
     font-size: 1.3rem;
-    color: #323232;
     text-shadow: 0px 1px 2px rgb(101, 101, 101);
     transform: translateY(-200%);
     transition: all 0.3s;

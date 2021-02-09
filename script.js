@@ -20,9 +20,11 @@ const tabAudio = [chrono, over, wrong, right, newRecord];
 mute(localStorage.getItem("sound")); //mute function
 
 /***************Start Game***************/
-btnStart.onclick = init;
+formMinMax.onsubmit = init;
 btnHome.onclick = home;
 
+minNum.onfocus = () => minNum.value = "";
+maxNum.onfocus = () => maxNum.value = "";
 minNum.oninput = verifInput;
 maxNum.oninput = verifInput;
 
@@ -57,7 +59,8 @@ function verifInput() {
 }
 
 /***************Init the Game***************/
-function init() {
+function init(e) {
+    e.preventDefault();
     widthBar = 0;
     step = 5;
     score = 0;

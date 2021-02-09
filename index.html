@@ -18,10 +18,13 @@
 <body>
     <!-- Page de Démarrage -->
     <div class="container_start" id="container_start">
-        <form onSubmit="return false;">
+        <form id="formMinMax">
             <div class="container-min-max">
-                <input type="number" id="minNum" class="min" placeholder="Min">
-                <input type="number" id="maxNum" class="max" placeholder="Max">
+                <input type="number" id="minNum" value=2 class="min" min=0 placeholder="Min" inputmode="tel"
+                    pattern="\d*">
+                <div class="a-div">À</div>
+                <input type="number" id="maxNum" value=10 class="max" max=100 placeholder="Max" inputmode="tel"
+                    pattern="\d*">
             </div>
             <div class="container_btn">
                 <button id="btnStart" type="submit" class="btn">Démarrer</button>
@@ -52,7 +55,7 @@
             <span id="number2"></span>
         </div>
         <hr>
-        <input type="number" id="reponse" class="reponse" placeholder="...?">
+        <input type="number" id="reponse" class="reponse" placeholder="...?" inputmode="tel">
         <hr>
 
     </div>
