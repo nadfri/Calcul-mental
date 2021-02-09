@@ -68,7 +68,7 @@ function init(e) {
     hiScore = localStorage.getItem("hiScore") || "5";
     hiScoreID.textContent = hiScore;
 
-    installBtn.classList.remove("slide"); //affiche la banniere perso
+    installBtn.classList.remove("slide"); //enleve la banniere perso
     container_start.style.display = "none";
     container_jeu.style.display = "block";
     document.body.classList.add("filterBlur"); //blur effect
@@ -128,8 +128,9 @@ function nextNumber() {
 function newHiScore() {
     if (min < 3 && max > 9) {
         if (score > hiScore) {
-            localStorage.setItem("hiScore", score);
-            hiScoreID.textContent = score;
+            hiScore = score;
+            localStorage.setItem("hiScore", hiScore);
+            hiScoreID.textContent = hiScore;
             if (firstRecord) {
                 newRecord.play();
                 firstRecord = false;
