@@ -182,7 +182,6 @@ function gameOver() {
 
 /***************Back Home Function***************/
 function home() {
-    installBtn.classList.add("slide"); //affiche la banniere perso
     container_start.style.display = "block";
     container_jeu.style.display = "none";
     container_gameOver.style.display = "none";
