@@ -296,7 +296,7 @@ hr {
 }
 
 .brain {
-    width: 50vw;
+    width: 30vw;
     max-width: 400px;
     margin: 5px;
     text-align: center;
@@ -349,15 +349,22 @@ hr {
 .home {
     width: 50px;
     height: 50px;
-    margin-top: 20px;
+    margin-top: 10px;
     border-radius: 50%;
     border: 2px solid #393e46;
+    background-image: url(./images/elipse.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 125%;
     background-color: #EFEFEF;
     box-shadow: 2px 2px 6px 1px #1e1e1e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .home img {
-    width: 100%;
+    width: 65%;
 }
 
 /*Banniere d'installation PWA*/
