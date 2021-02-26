@@ -45,7 +45,7 @@ body {
     left: 0;
     margin: auto;
     font-family: 'Playball', cursive;
-    background-color: cornflowerblue;
+    background-color: rgba(100, 148, 237);
     color: #323232;
     background-image: url(./images/brain.png);
     background-repeat: no-repeat;
@@ -53,14 +53,12 @@ body {
     background-position: center;
     background-size: 80%;
     border: solid 10px gold;
-    -webkit-backdrop-filter: blur(0);
-    backdrop-filter: blur(0);
-    transition: backdrop-filter 1.5s;
+    transition: all 1s;
 }
 
-.filterBlur {
-    -webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(5px);
+.filter {
+    /* backdrop-filter: blur(5px); */
+    background-color: #274b8e;
 }
 
 /*Container de la parge Demarrer*/
@@ -289,10 +287,14 @@ hr {
     height: 100%;
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
     display: none;
     flex-direction: column;
     align-items: center;
+    transition: all 0.5s;
+}
+
+.filterBlur{
+    backdrop-filter: blur(3px);
 }
 
 .brain {

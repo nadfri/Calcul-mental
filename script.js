@@ -71,7 +71,8 @@ function init(e) {
     installBtn.classList.remove("slide"); //enleve la banniere perso
     container_start.style.display = "none";
     container_jeu.style.display = "block";
-    document.body.classList.add("filterBlur"); //blur effect
+    document.body.classList.add("filter");
+    document.body.style.backgroundImage = "url('./images/brain2.png')";
 
     min = (minNum.value) ? parseInt(minNum.value) : 2;
     max = (maxNum.value) ? parseInt(maxNum.value) : 10;
@@ -140,8 +141,10 @@ function newHiScore() {
 }
 /***************Replay Function***************/
 btnReplay.onclick = () => {
-    document.body.classList.add("filterBlur"); //blur effect
+    document.body.classList.add("filter");
+    document.body.style.backgroundImage = "url('./images/brain2.png')";
     container_gameOver.style.display = "none";
+    container_gameOver.classList.remove("filterBlur");
     container_brain.classList.remove("rotate");
     score = 0;
     scoreID.textContent = 0;
@@ -170,9 +173,11 @@ function gameOver() {
     reponse.blur();
 
     setTimeout(() => {
-        document.body.classList.remove("filterBlur"); //blur effect
+        document.body.style.backgroundImage = "url('./images/brain.png')";
+        document.body.classList.remove("filter");
         document.body.style.borderColor = "gold";
         container_gameOver.style.display = "flex";
+        setTimeout(() => container_gameOver.classList.add("filterBlur"), 5);
 
         bonneReponse.textContent = `${number1.textContent} x ${number2.textContent} = ${resultat}`;
         scoreFinal.textContent = score;
