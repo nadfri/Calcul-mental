@@ -55,12 +55,12 @@ body {
     border: solid 10px gold;
     -webkit-backdrop-filter: blur(0);
     backdrop-filter: blur(0);
-    transition: all 1.5s;
+    transition: backdrop-filter 1.5s;
 }
 
 .filterBlur {
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
 }
 
 /*Container de la parge Demarrer*/
@@ -125,43 +125,43 @@ body {
 
 @-webkit-keyframes heartbeat {
     0% {
-        transform: scale( .75);
+        transform: scale3d( 0.75, 1, 1);
     }
     20% {
-        transform: scale( 1);
+        transform: scale3d( 1, 1, 1);
     }
     40% {
-        transform: scale( .75);
+        transform: scale3d( 0.75, 1, 1);
     }
     60% {
-        transform: scale( 1);
+        transform: scale3d( 1, 1, 1);
     }
     80% {
-        transform: scale( .75);
+        transform: scale3d( 0.75, 1, 1);
     }
     100% {
-        transform: scale( .75);
+        transform: scale3d( 0.75, 1, 1);
     }
 }
 
 @keyframes heartbeat {
     0% {
-        transform: scale( .75);
+        transform: scale3d( 0.75, 1, 1);
     }
     20% {
-        transform: scale( 1);
+        transform: scale3d( 1, 1, 1);
     }
     40% {
-        transform: scale( .75);
+        transform: scale3d( 0.75, 1, 1);
     }
     60% {
-        transform: scale( 1);
+        transform: scale3d( 1, 1, 1);
     }
     80% {
-        transform: scale( .75);
+        transform: scale3d( 0.75, 1, 1);
     }
     100% {
-        transform: scale( .75);
+        transform: scale3d( 0.75, 1, 1);
     }
 }
 
@@ -263,16 +263,16 @@ hr {
     background: linear-gradient(to right, gold 40%, #e5405e 65%);
     border-top-right-radius: 40px;
     border-bottom-right-radius: 40px;
-    transition: all 500ms;
+    transition: width 500ms;
 }
 
 #container_brain {
     width: 15%;
-    transition: all 2s;
+    transition: transform 2s;
 }
 
 .rotate {
-    transform: rotate(540deg);
+    transform: rotate3d(0, 0, 1, 540deg);
 }
 
 .brain2 {
@@ -298,25 +298,25 @@ hr {
 .brain {
     width: 30vw;
     max-width: 400px;
-    margin: 5px;
+    margin: 20px;
     text-align: center;
 }
 
 .brain img {
     width: 100%;
-    -webkit-animation: rotation 2s infinite;
-    animation: rotation 2s infinite;
+    -webkit-animation: rotation 2s 0.5s infinite;
+    animation: rotation 2s 0.5s infinite;
 }
 
 @-webkit-keyframes rotation {
     to {
-        transform: rotate(360deg);
+        transform: rotate3d(0, 0, 1, 360deg);
     }
 }
 
 @keyframes rotation {
     to {
-        transform: rotate(360deg);
+        transform: rotate3d(0, 0, 1, 360deg);
     }
 }
 
@@ -384,13 +384,13 @@ hr {
     border-bottom-right-radius: 40px;
     font-size: 1.3rem;
     text-shadow: 0px 1px 2px rgb(101, 101, 101);
-    transform: translateY(-200%);
-    transition: all 0.3s;
+    transform: translate3d(0, -200%, 0);
+    transition: transform 0.3s;
     cursor: pointer;
 }
 
 .slide {
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
 }
 
 @media (min-width:600px) {
