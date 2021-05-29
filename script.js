@@ -187,7 +187,7 @@ function gameOver() {
 
 /***************Back Home Function***************/
 function home() {
-    container_star.style.display = "block";
+    container_start.style.display = "block";
     container_jeu.style.display = "none";
     container_gameOver.style.display = "none";
     reponse.value = "";
